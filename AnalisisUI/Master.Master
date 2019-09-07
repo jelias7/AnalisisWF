@@ -1,0 +1,42 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="AnalisisUI.Master" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/toastr.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-3.0.0.slim.min.js"></script>
+    <script src="/Scripts/popper.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/toastr.min.js"></script>
+    <title><%: Page.Title %> de Analisis</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <a class="navbar-brand" href="#" style="color:#ffffff"><%: Page.Title %></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="#" style="color:#ffffff">← Atras</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+        <br />
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
