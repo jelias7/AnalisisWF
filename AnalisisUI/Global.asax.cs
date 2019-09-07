@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -19,6 +21,7 @@ namespace AnalisisUI
                 CdnPath = "https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.0.0.min.js",
                 CdnDebugPath = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.0.0.js"
             });
+            Database.SetInitializer<Contexto>(new DatabaseInitializer());
         }
     }
 }
