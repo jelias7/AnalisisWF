@@ -62,7 +62,8 @@ namespace AnalisisUI.Registros
         }
         protected void BindGrid()
         {
-            if (ViewState["Analisis"] != null) {
+            if (ViewState["Analisis"] != null)
+            {
                 Grid.DataSource = ((Analisis)ViewState["Analisis"]).Detalle;
                 Grid.DataBind();
             }
@@ -87,6 +88,36 @@ namespace AnalisisUI.Registros
             ViewState["Detalle"] = Analisis.Detalle;
 
             this.BindGrid();
+
+            Grid.Columns[1].Visible = false;
+
+            ResultadoTextBox.Text = string.Empty;
+        }
+
+        protected void Grid_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int Fila = e.RowIndex;
+
+            Analisis Analisis = new Analisis();
+
+            Analisis = (Analisis)ViewState["Analisis"];
+
+            Analisis.Detalle.RemoveAt(Fila);
+
+            ViewState["Detalle"] = Analisis.Detalle;
+
+            this.BindGrid();
+
+            ResultadoTextBox.Text = string.Empty;
+        }
+
+        protected void Grid_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            Grid.DataSource = ViewState["Detalle"];
+
+            Grid.PageIndex = e.NewPageIndex;
+
+            Grid.DataBind();
         }
     }
 }

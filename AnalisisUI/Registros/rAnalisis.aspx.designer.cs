@@ -112,6 +112,51 @@ namespace AnalisisUI.Registros {
         protected global::System.Web.UI.WebControls.GridView Grid;
         
         /// <summary>
+        /// TiposIdTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TiposIdTextBox;
+        
+        /// <summary>
+        /// AnalisisTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox AnalisisTextBox;
+        
+        /// <summary>
+        /// RFVAnalisis control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFVAnalisis;
+        
+        /// <summary>
+        /// TiposGuardarButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button TiposGuardarButton;
+        
+        /// <summary>
+        /// TiposEliminarButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button TiposEliminarButton;
+        
+        /// <summary>
         /// NuevoButton control.
         /// </summary>
         /// <remarks>
