@@ -85,6 +85,9 @@
                  <div class="col-md-3 col-sm-2 col-xs-4">
                    <asp:TextBox type="number" ID="TiposIdTextBox" runat="server" min=0 class="form-control input-sm"></asp:TextBox>
                  </div>
+                 <div class="col-md-3 col-sm-2 col-xs-4">
+                 <asp:LinkButton ID="TiposBuscarButton" CssClass="btn btn-dark btn-block btn-md" CausesValidation="false" runat="server" Text="Buscar" OnClick="TiposBuscarButton_Click"></asp:LinkButton>
+                 </div> 
                  </div>
                  <div class="form-group row">
                    <label for="Analisis" class="col-sm-2 col-form-label">Analisis</label>
@@ -97,9 +100,9 @@
             </div>
 
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
-            <asp:Button Text="Guardar" class="btn btn-warning btn-sm" style="color:#FFF" runat="server" ValidationGroup="Tipos" id="TiposGuardarButton" />
-            <asp:Button Text="Eliminar" class="btn btn-danger btn-sm" runat="server" CausesValidation="false" id="TiposEliminarButton" />
+            <asp:Button Text="Nuevo" class="btn btn-warning btn-sm" style="color:#FFF" runat="server" CausesValidation="false" id="TiposNuevoButton" OnClick="TiposNuevoButton_Click" />
+            <asp:Button Text="Guardar" class="btn btn-success btn-sm" runat="server" ValidationGroup="Tipos" id="TiposGuardarButton" OnClick="TiposGuardarButton_Click" />
+            <asp:Button Text="Eliminar" class="btn btn-danger btn-sm" runat="server" CausesValidation="false" id="TiposEliminarButton" OnClick="TiposEliminarButton_Click" />
             </div>
 
             </div>

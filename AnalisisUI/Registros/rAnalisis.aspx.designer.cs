@@ -121,6 +121,15 @@ namespace AnalisisUI.Registros {
         protected global::System.Web.UI.WebControls.TextBox TiposIdTextBox;
         
         /// <summary>
+        /// TiposBuscarButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton TiposBuscarButton;
+        
+        /// <summary>
         /// AnalisisTextBox control.
         /// </summary>
         /// <remarks>
@@ -137,6 +146,15 @@ namespace AnalisisUI.Registros {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RFVAnalisis;
+        
+        /// <summary>
+        /// TiposNuevoButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button TiposNuevoButton;
         
         /// <summary>
         /// TiposGuardarButton control.
