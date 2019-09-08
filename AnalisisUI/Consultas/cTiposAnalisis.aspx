@@ -1,8 +1,8 @@
-﻿<%@ Page Title="Consulta" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="cAnalisis.aspx.cs" Inherits="AnalisisUI.Consultas.cAnalisis" %>
+﻿<%@ Page Title="Consulta de Tipos" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="cTiposAnalisis.aspx.cs" Inherits="AnalisisUI.Consultas.cTiposAnalisis" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<div class="panel panel-primary">
+    <div class="panel panel-primary">
         <div class="panel-body">
 
             <div class="form-group row">
@@ -25,7 +25,7 @@
                     <asp:DropDownList ID="FiltroDropDown" runat="server" CssClass="form-control input-sm" >
                         <asp:ListItem>Todo</asp:ListItem>
                         <asp:ListItem>ID</asp:ListItem>
-                        <asp:ListItem>Paciente</asp:ListItem>
+                        <asp:ListItem>Analisis</asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <label for="CheckBox" class="col-sm-1 col-form-label">Fecha?</label>
@@ -45,11 +45,11 @@
             </div>
 
            </div>
-                    <asp:GridView ID="Grid" runat="server" class="table table-condensed table-responsive" AutoGenerateColumns="true" ShowHeaderWhenEmpty="True" DataKeyNames="AnalisisId" CellPadding="4" ForeColor="Black" GridLines="None">
+                    <asp:GridView ID="Grid" runat="server" class="table table-condensed table-responsive" AutoGenerateColumns="true" ShowHeaderWhenEmpty="True" DataKeyNames="TiposId" CellPadding="4" ForeColor="Black" GridLines="None">
                     <EmptyDataTemplate><div style="text-align:center">No hay datos.</div></EmptyDataTemplate>
                     <AlternatingRowStyle BackColor="White" />
                     <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                     <RowStyle BackColor="#EFF3FB" />
                 </asp:GridView>
-</div>
+        </div>
 </asp:Content>

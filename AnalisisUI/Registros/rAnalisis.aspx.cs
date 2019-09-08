@@ -118,10 +118,10 @@ namespace AnalisisUI.Registros
         }
         private void LlenaCampo(Analisis Analisis)
         {
+            ((Analisis)ViewState["Analisis"]).Detalle = Analisis.Detalle;
             IDTextBox.Text = Convert.ToString(Analisis.AnalisisId);
             FechaTextBox.Text = Analisis.Fecha.ToString("yyyy-MM-dd");
             PacienteDropDown.SelectedValue = Analisis.Paciente;
-            ((Analisis)ViewState["Analisis"]).Detalle = Analisis.Detalle;
             this.BindGrid();
         }
         protected void AgregarGrid_Click(object sender, EventArgs e)
