@@ -148,6 +148,24 @@ namespace AnalisisUI.Registros {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RFVAnalisis;
         
         /// <summary>
+        /// TiposAnalisisFechaTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TiposAnalisisFechaTextBox;
+        
+        /// <summary>
+        /// RFV control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFV;
+        
+        /// <summary>
         /// TiposNuevoButton control.
         /// </summary>
         /// <remarks>

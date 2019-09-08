@@ -20,20 +20,6 @@ namespace AnalisisUI.Registros
                 LimpiarAnalisis();
                 LimpiarTiposAnalisis();
 
-                int ID = Utils.ToInt(Request.QueryString["id"]);
-
-                if (ID > 0)
-                {
-                    RepositorioBase<Analisis> repositorio = new RepositorioBase<Analisis>();
-
-                    var AnalisisBuscado = repositorio.Buscar(ID);
-
-                    if (AnalisisBuscado == null)
-                         MostrarMensaje(TiposMensaje.Error, "Analisis no encontrado.");
-                    else
-                        LlenaCampo(AnalisisBuscado);
-                }
-
                 ViewState["Analisis"] = new Analisis();
                 BindGrid();
             }
@@ -78,7 +64,7 @@ namespace AnalisisUI.Registros
         private void LimpiarAnalisis()
         {
             IDTextBox.Text = "0";
-            FechaTextBox.Text = DateTime.Today.ToString("yyyy-MM-dd");
+            FechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
             PacienteDropDown.SelectedIndex = 0;
             TiposAnalisisDropDown.SelectedIndex = 0;
             ResultadoTextBox.Text = string.Empty;
@@ -89,6 +75,7 @@ namespace AnalisisUI.Registros
         {
             TiposIdTextBox.Text = "0";
             AnalisisTextBox.Text = string.Empty;
+            TiposAnalisisFechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
         }
         private bool TiposExisteEnLaBaseDeDatos()
         {
@@ -108,6 +95,7 @@ namespace AnalisisUI.Registros
 
             Tipos.TiposId = Utils.ToInt(TiposIdTextBox.Text);
             Tipos.Analisis = AnalisisTextBox.Text;
+            Tipos.Fecha = Utils.ToDateTime(TiposAnalisisFechaTextBox.Text);
 
             return Tipos;
         }
@@ -117,7 +105,7 @@ namespace AnalisisUI.Registros
 
             Analisis = (Analisis)ViewState["Analisis"];
             Analisis.AnalisisId = Utils.ToInt(IDTextBox.Text);
-            Analisis.Paciente = PacienteDropDown.Text;
+            Analisis.Paciente = PacienteDropDown.SelectedItem.ToString();
             Analisis.Fecha = Utils.ToDateTime(FechaTextBox.Text);
 
             return Analisis;
@@ -126,6 +114,7 @@ namespace AnalisisUI.Registros
         {
             TiposIdTextBox.Text = Tipos.TiposId.ToString();
             AnalisisTextBox.Text = Tipos.Analisis;
+            TiposAnalisisFechaTextBox.Text = Tipos.Fecha.ToString("yyyy-MM-dd");
         }
         private void LlenaCampo(Analisis Analisis)
         {

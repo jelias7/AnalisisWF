@@ -96,6 +96,13 @@
                     <asp:RequiredFieldValidator ID="RFVAnalisis" runat="server" ValidationGroup="Tipos" MaxLength="200" ControlToValidate="AnalisisTextBox" ErrorMessage="Campo obligatorio" ForeColor="Black" Display="Dynamic" SetFocusOnError="True" ToolTip="Campo obligatorio"></asp:RequiredFieldValidator>
                    </div>
                  </div>
+                   <div class="form-group row">
+                   <label for="Fecha" class="col-sm-2 col-form-label">Fecha</label>
+                   <div class="col-md-6">
+                    <asp:TextBox ID="TiposAnalisisFechaTextBox" type="date" runat="server" Class="form-control input-sm"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RFV" runat="server" ValidationGroup="Tipos" MaxLength="200" ControlToValidate="TiposAnalisisFechaTextBox" ErrorMessage="Campo obligatorio" ForeColor="Black" Display="Dynamic" SetFocusOnError="True" ToolTip="Campo obligatorio"></asp:RequiredFieldValidator>
+                   </div>
+                 </div>
              </div>
             </div>
 
