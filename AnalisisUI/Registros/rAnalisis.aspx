@@ -12,7 +12,7 @@
                         <asp:TextBox type="number" ID="IDTextBox" runat="server" min=0 class="form-control input-sm"></asp:TextBox>
                     </div>
                     <div class="col-md-3 col-sm-2 col-xs-4">
-                         <asp:LinkButton ID="BuscarButton" CssClass="btn btn-dark btn-block btn-md" CausesValidation="false" runat="server" Text="Buscar"></asp:LinkButton>
+                         <asp:LinkButton ID="AnalisisBuscarButton" CssClass="btn btn-dark btn-block btn-md" CausesValidation="false" runat="server" Text="Buscar" OnClick="AnalisisBuscarButton_Click"></asp:LinkButton>
                     </div>    
                     <label for="Fecha" class="col-xs-1 col-form-label">Fecha</label>
                     <div class="col-md-3">
@@ -112,6 +112,7 @@
          <%--FIN--%>
 
          </div>
+         <asp:Label ID="Mensaje" runat="server" CssClass="col-form-label-lg" Text=""></asp:Label>
         </div>
         
           <br />
@@ -119,9 +120,9 @@
             <div class="text-center">
                 <div class="form-group" style="display: inline-block">
 
-                    <asp:Button Text="Nuevo" class="btn btn-warning btn-sm" CausesValidation="false" style="color:#fff" runat="server" ID="NuevoButton" />
-                    <asp:Button Text="Guardar" class="btn btn-success btn-sm" runat="server" ValidationGroup="Analisis" ID="GuardarButton"/>
-                    <asp:Button Text="Eliminar" class="btn btn-danger btn-sm" CausesValidation="false" runat="server" ID="EliminarButton" />
+                    <asp:Button Text="Nuevo" class="btn btn-warning btn-sm" CausesValidation="false" style="color:#fff" runat="server" ID="AnalisisNuevoButton" OnClick="AnalisisNuevoButton_Click" />
+                    <asp:Button Text="Guardar" class="btn btn-success btn-sm" runat="server" ID="AnalisisGuardarButton" OnClick="AnalisisGuardarButton_Click"/>
+                    <asp:Button Text="Eliminar" class="btn btn-danger btn-sm" CausesValidation="false" runat="server" ID="AnalisisEliminarButton" OnClick="AnalisisEliminarButton_Click" />
 
                 </div>
             </div>

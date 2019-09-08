@@ -22,13 +22,13 @@ namespace AnalisisUI.Registros {
         protected global::System.Web.UI.WebControls.TextBox IDTextBox;
         
         /// <summary>
-        /// BuscarButton control.
+        /// AnalisisBuscarButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BuscarButton;
+        protected global::System.Web.UI.WebControls.LinkButton AnalisisBuscarButton;
         
         /// <summary>
         /// FechaTextBox control.
@@ -175,30 +175,39 @@ namespace AnalisisUI.Registros {
         protected global::System.Web.UI.WebControls.Button TiposEliminarButton;
         
         /// <summary>
-        /// NuevoButton control.
+        /// Mensaje control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button NuevoButton;
+        protected global::System.Web.UI.WebControls.Label Mensaje;
         
         /// <summary>
-        /// GuardarButton control.
+        /// AnalisisNuevoButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button GuardarButton;
+        protected global::System.Web.UI.WebControls.Button AnalisisNuevoButton;
         
         /// <summary>
-        /// EliminarButton control.
+        /// AnalisisGuardarButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EliminarButton;
+        protected global::System.Web.UI.WebControls.Button AnalisisGuardarButton;
+        
+        /// <summary>
+        /// AnalisisEliminarButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AnalisisEliminarButton;
     }
 }

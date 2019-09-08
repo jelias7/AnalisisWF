@@ -29,18 +29,25 @@ namespace AnalisisUI.Registros
                     var AnalisisBuscado = repositorio.Buscar(ID);
 
                     if (AnalisisBuscado == null)
-                    {
-                        // MostrarMensaje(TiposMensaje.Error, "Registro no encontrado");
-                    }
+                         MostrarMensaje(TiposMensaje.Error, "Analisis no encontrado.");
                     else
-                    {
-                        //LlenaCampo(AnalisisBuscado);
-                    }
+                        LlenaCampo(AnalisisBuscado);
                 }
 
                 ViewState["Analisis"] = new Analisis();
                 BindGrid();
             }
+        }
+        void MostrarMensaje(TiposMensaje tipo, string mensaje)
+        {
+            Mensaje.Text = mensaje;
+
+            if (tipo == TiposMensaje.Success)
+                Mensaje.CssClass = "alert-success";
+            else if (tipo == TiposMensaje.Error)
+                Mensaje.CssClass = "alert-danger";
+            else
+                Mensaje.CssClass = "alert-warning";
         }
         private void ValoresDeDropdowns()
         {
@@ -75,7 +82,8 @@ namespace AnalisisUI.Registros
             PacienteDropDown.SelectedIndex = 0;
             TiposAnalisisDropDown.SelectedIndex = 0;
             ResultadoTextBox.Text = string.Empty;
-            this.BindGrid();
+            Grid.DataSource = null;
+            Grid.DataBind();
         }
         private void LimpiarTiposAnalisis()
         {
@@ -88,7 +96,13 @@ namespace AnalisisUI.Registros
             TiposAnalisis Tipos = Repositorio.Buscar(Utils.ToInt(TiposIdTextBox.Text));
             return (Tipos != null);
         }
-        private TiposAnalisis LlenaClase()
+        private bool AnalisisExisteEnLaBaseDeDatos()
+        {
+            RepositorioBase<Analisis> Repositorio = new RepositorioBase<Analisis>();
+            Analisis Analisis = Repositorio.Buscar(Utils.ToInt(IDTextBox.Text));
+            return (Analisis != null);
+        }
+        private TiposAnalisis TiposLlenaClase()
         {
             TiposAnalisis Tipos = new TiposAnalisis();
 
@@ -97,10 +111,29 @@ namespace AnalisisUI.Registros
 
             return Tipos;
         }
+        private Analisis AnalisisLlenaClase()
+        {
+            Analisis Analisis = new Analisis();
+
+            Analisis = (Analisis)ViewState["Analisis"];
+            Analisis.AnalisisId = Utils.ToInt(IDTextBox.Text);
+            Analisis.Paciente = PacienteDropDown.Text;
+            Analisis.Fecha = Utils.ToDateTime(FechaTextBox.Text);
+
+            return Analisis;
+        }
         private void LlenaCampo(TiposAnalisis Tipos)
         {
             TiposIdTextBox.Text = Tipos.TiposId.ToString();
             AnalisisTextBox.Text = Tipos.Analisis;
+        }
+        private void LlenaCampo(Analisis Analisis)
+        {
+            IDTextBox.Text = Convert.ToString(Analisis.AnalisisId);
+            FechaTextBox.Text = Analisis.Fecha.ToString("yyyy-MM-dd");
+            PacienteDropDown.SelectedValue = Analisis.Paciente;
+            ((Analisis)ViewState["Analisis"]).Detalle = Analisis.Detalle;
+            this.BindGrid();
         }
         protected void AgregarGrid_Click(object sender, EventArgs e)
         {
@@ -121,15 +154,15 @@ namespace AnalisisUI.Registros
 
         protected void Grid_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int Fila = e.RowIndex;
-
             Analisis Analisis = new Analisis();
 
             Analisis = (Analisis)ViewState["Analisis"];
 
-            Analisis.Detalle.RemoveAt(Fila);
-
             ViewState["Detalle"] = Analisis.Detalle;
+
+            int Fila = e.RowIndex;
+
+            Analisis.Detalle.RemoveAt(Fila);
 
             this.BindGrid();
 
@@ -152,7 +185,7 @@ namespace AnalisisUI.Registros
 
             bool paso = false;
 
-            Tipo = LlenaClase();
+            Tipo = TiposLlenaClase();
 
             if (Utils.ToInt(TiposIdTextBox.Text) == 0)
             {
@@ -164,7 +197,7 @@ namespace AnalisisUI.Registros
                 if (!TiposExisteEnLaBaseDeDatos())
                 {
 
-                    Utils.ShowToastr(this, "Error al guardar.", "Error", "error");
+                    MostrarMensaje(TiposMensaje.Error, "Error al guardar.");
                     return;
                 }
                 paso = Repositorio.Modificar(Tipo);
@@ -173,11 +206,11 @@ namespace AnalisisUI.Registros
 
             if (paso)
             {
-                Utils.ShowToastr(this, "Se ha guardado exitosamente.", "Exito", "success");
+                MostrarMensaje(TiposMensaje.Success, "Exito al guardar.");
                 return;
             }
             else
-                Utils.ShowToastr(this, "Error al guardar.", "Error", "error");
+                MostrarMensaje(TiposMensaje.Error, "Error al guardar.");
         }
 
         protected void TiposEliminarButton_Click(object sender, EventArgs e)
@@ -190,13 +223,13 @@ namespace AnalisisUI.Registros
             {
                 if (Repositorio.Eliminar(Utils.ToInt(TiposIdTextBox.Text)))
                 {
-                    Utils.ShowToastr(this, "Se ha eliminado.", "Exito", "success");
+                    MostrarMensaje(TiposMensaje.Success, "Eliminado con exito.");
                 }
                 else
-                    Utils.ShowToastr(this, "No se ha podido eliminar.", "Error", "error");
+                    MostrarMensaje(TiposMensaje.Error, "No se ha podido eliminar.");
             }
             else
-                Utils.ShowToastr(this, "No se ha podido eliminar.", "Error", "error");
+                MostrarMensaje(TiposMensaje.Error, "No se ha podido eliminar.");
 
             LimpiarTiposAnalisis();
         }
@@ -213,13 +246,92 @@ namespace AnalisisUI.Registros
                 LlenaCampo(Tipos);
             else
             {
-                Utils.ShowToastr(this, "No se ha encontrado.", "Advertencia", "warning");
+                MostrarMensaje(TiposMensaje.Warning, "Problemas inesperados.");
                 LimpiarTiposAnalisis();
             }    
         }
 
         protected void TiposNuevoButton_Click(object sender, EventArgs e)
         {
+            LimpiarTiposAnalisis();
+        }
+
+        protected void AnalisisNuevoButton_Click(object sender, EventArgs e)
+        {
+            LimpiarAnalisis();
+        }
+
+        protected void AnalisisBuscarButton_Click(object sender, EventArgs e)
+        {
+            RepositorioBase<Analisis> Repositorio = new RepositorioBase<Analisis>();
+
+            Analisis Analisis = new Analisis();
+
+            Analisis = Repositorio.Buscar(Utils.ToInt(IDTextBox.Text));
+
+            if (Analisis != null)
+                LlenaCampo(Analisis);
+            else
+            {
+                MostrarMensaje(TiposMensaje.Warning, "Problemas inesperados.");
+                LimpiarTiposAnalisis();
+            }
+        }
+
+        protected void AnalisisGuardarButton_Click(object sender, EventArgs e)
+        {
+            Analisis Analisis = new Analisis();
+            RepositorioBase<Analisis> Repositorio = new RepositorioBase<Analisis>();
+            bool paso = false;
+
+            Analisis = AnalisisLlenaClase();
+
+            if (Utils.ToInt(IDTextBox.Text) == 0)
+            {
+                paso = Repositorio.Guardar(Analisis);
+                LimpiarAnalisis();
+            }
+            else
+            {
+                if (!AnalisisExisteEnLaBaseDeDatos())
+                {
+
+                    MostrarMensaje(TiposMensaje.Error, "Error al guardar.");
+                    return;
+                }
+                paso = Repositorio.Modificar(Analisis);
+                LimpiarAnalisis();
+            }
+
+            if (paso)
+            {
+                MostrarMensaje(TiposMensaje.Success, "Exito al guardar.");
+                return;
+            }
+            else
+                MostrarMensaje(TiposMensaje.Error, "Error al guardar.");
+
+            LimpiarAnalisis();
+        }
+
+        protected void AnalisisEliminarButton_Click(object sender, EventArgs e)
+        {
+            RepositorioBase<Analisis> Repositorio = new RepositorioBase<Analisis>();
+
+            var Analisis = Repositorio.Buscar(Utils.ToInt(IDTextBox.Text));
+
+            if (Analisis != null)
+            {
+                if (Repositorio.Eliminar(Utils.ToInt(IDTextBox.Text)))
+                {
+                    MostrarMensaje(TiposMensaje.Success, "Eliminado con exito.");
+                }
+                else
+                    MostrarMensaje(TiposMensaje.Error, "No se ha podido eliminar.");
+            }
+            else
+                MostrarMensaje(TiposMensaje.Error, "No se ha podido eliminar.");
+
             LimpiarTiposAnalisis();
         }
     }

@@ -155,6 +155,7 @@
     <Compile Include="Registros\rAnalisis.aspx.designer.cs">
       <DependentUpon>rAnalisis.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Utilitarios\Enums.cs" />
     <Compile Include="Utilitarios\Utils.cs" />
   </ItemGroup>
   <ItemGroup>

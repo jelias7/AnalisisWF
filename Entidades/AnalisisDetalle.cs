@@ -13,8 +13,8 @@ namespace Entidades
     {
         [Key]
         public int DetalleId { get; set; }
-        public string Analisis { get; set; }
         public string Resultado { get; set; }
+        public string Analisis { get; set; }
         public AnalisisDetalle()
         {
             DetalleId = 0;

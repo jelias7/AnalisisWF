@@ -12,12 +12,10 @@ namespace Entidades
         [Key]
         public int TiposId { get; set; }
         public string Analisis { get; set; }
-        public int Cantidad { get; set; }
         public TiposAnalisis()
         {
             TiposId = 0;
             Analisis = string.Empty;
-            Cantidad = 0;
         }
     }
 }
