@@ -121,7 +121,7 @@ namespace AnalisisUI.Registros
             ((Analisis)ViewState["Analisis"]).Detalle = Analisis.Detalle;
             IDTextBox.Text = Convert.ToString(Analisis.AnalisisId);
             FechaTextBox.Text = Analisis.Fecha.ToString("yyyy-MM-dd");
-            PacienteDropDown.SelectedValue = Analisis.Paciente;
+            ///PacienteDropDown.SelectedValue = Analisis.Paciente;
             this.BindGrid();
         }
         protected void AgregarGrid_Click(object sender, EventArgs e)
@@ -247,7 +247,7 @@ namespace AnalisisUI.Registros
 
         protected void AnalisisNuevoButton_Click(object sender, EventArgs e)
         {
-            LimpiarAnalisis();
+            Response.Redirect(Request.RawUrl);
         }
 
         protected void AnalisisBuscarButton_Click(object sender, EventArgs e)
