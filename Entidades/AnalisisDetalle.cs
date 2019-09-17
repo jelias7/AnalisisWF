@@ -12,19 +12,22 @@ namespace Entidades
     public class AnalisisDetalle
     {
         [Key]
-        public int DetalleId { get; set; }
+        public int AnalisisDetalleId { get; set; }
         public string Resultado { get; set; }
-        public string Analisis { get; set; }
+        public int TiposId { get; set; }
+        public decimal Monto { get; set; }
         public AnalisisDetalle()
         {
-            DetalleId = 0;
-            Analisis = string.Empty;
+            AnalisisDetalleId = 0;
+            TiposId = 0;
             Resultado = string.Empty;
+            Monto = 0;
         }
-        public AnalisisDetalle(string analisis, string resultado)
+        public AnalisisDetalle(int analisis, string resultado, decimal monto)
         {
-            Analisis = analisis;
+            TiposId = analisis;
             Resultado = resultado;
+            Monto = monto;
         }
     }
 }

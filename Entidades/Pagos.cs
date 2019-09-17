@@ -8,24 +8,19 @@ using System.Threading.Tasks;
 namespace Entidades
 {
     [Serializable]
-    public class Analisis
+    public class Pagos
     {
         [Key]
+        public int PagosId { get; set; }
         public int AnalisisId { get; set; }
-        public string Paciente { get; set; }
-        public decimal Balance { get; set; }
         public decimal Monto { get; set; }
         public DateTime Fecha { get; set; }
-        public virtual List<AnalisisDetalle> Detalle {get;set;}
-
-        public Analisis()
+        public Pagos()
         {
+            PagosId = 0;
             AnalisisId = 0;
-            Paciente = string.Empty;
             Monto = 0;
-            Balance = 0;
             Fecha = DateTime.Now;
-            Detalle = new List<AnalisisDetalle>();
         }
     }
 }
