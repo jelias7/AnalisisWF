@@ -49,7 +49,7 @@ namespace AnalisisUI.Registros
             var list = new List<TiposAnalisis>();
             list = repositorio.GetList(p => true);
             TiposAnalisisDropDown.DataSource = list;
-            TiposAnalisisDropDown.DataValueField = "TiposId";
+            TiposAnalisisDropDown.DataValueField = "Precio";
             TiposAnalisisDropDown.DataTextField = "Analisis";
             TiposAnalisisDropDown.DataBind();
         }
@@ -68,6 +68,8 @@ namespace AnalisisUI.Registros
             PacienteDropDown.SelectedIndex = 0;
             TiposAnalisisDropDown.SelectedIndex = 0;
             ResultadoTextBox.Text = string.Empty;
+            MontoTextBox.Text = string.Empty;
+            BalanceTextBox.Text = string.Empty;
             Grid.DataSource = null;
             Grid.DataBind();
         }
@@ -75,6 +77,7 @@ namespace AnalisisUI.Registros
         {
             TiposIdTextBox.Text = "0";
             AnalisisTextBox.Text = string.Empty;
+            PrecioTextBox.Text = string.Empty;
             TiposAnalisisFechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
         }
         private bool TiposExisteEnLaBaseDeDatos()
@@ -95,6 +98,7 @@ namespace AnalisisUI.Registros
 
             Tipos.TiposId = Utils.ToInt(TiposIdTextBox.Text);
             Tipos.Analisis = AnalisisTextBox.Text;
+            Tipos.Precio = Utils.ToDecimal(PrecioTextBox.Text);
             Tipos.Fecha = Utils.ToDateTime(TiposAnalisisFechaTextBox.Text);
 
             return Tipos;
@@ -106,6 +110,8 @@ namespace AnalisisUI.Registros
             Analisis = (Analisis)ViewState["Analisis"];
             Analisis.AnalisisId = Utils.ToInt(IDTextBox.Text);
             Analisis.Paciente = PacienteDropDown.SelectedItem.ToString();
+            Analisis.Balance = Utils.ToDecimal(BalanceTextBox.Text);
+            Analisis.Monto = Utils.ToDecimal(MontoTextBox.Text);
             Analisis.Fecha = Utils.ToDateTime(FechaTextBox.Text);
 
             return Analisis;
@@ -114,14 +120,17 @@ namespace AnalisisUI.Registros
         {
             TiposIdTextBox.Text = Tipos.TiposId.ToString();
             AnalisisTextBox.Text = Tipos.Analisis;
+            PrecioTextBox.Text = Tipos.Precio.ToString();
             TiposAnalisisFechaTextBox.Text = Tipos.Fecha.ToString("yyyy-MM-dd");
         }
         private void LlenaCampo(Analisis Analisis)
         {
             ((Analisis)ViewState["Analisis"]).Detalle = Analisis.Detalle;
-            IDTextBox.Text = Convert.ToString(Analisis.AnalisisId);
+            IDTextBox.Text = Analisis.AnalisisId.ToString();
             FechaTextBox.Text = Analisis.Fecha.ToString("yyyy-MM-dd");
-            ///PacienteDropDown.SelectedValue = Analisis.Paciente;
+            PacienteDropDown.SelectedValue = Analisis.Paciente;
+            MontoTextBox.Text = Analisis.Monto.ToString();
+            BalanceTextBox.Text = Analisis.Balance.ToString();
             this.BindGrid();
         }
         protected void AgregarGrid_Click(object sender, EventArgs e)
@@ -130,7 +139,11 @@ namespace AnalisisUI.Registros
 
             Analisis = (Analisis)ViewState["Analisis"];
 
-            Analisis.Detalle.Add(new AnalisisDetalle(TiposAnalisisDropDown.SelectedItem.ToString(), ResultadoTextBox.Text));
+            Analisis.Detalle.Add(new AnalisisDetalle(
+                Utils.ToInt(TiposAnalisisDropDown.SelectedValue),
+                ResultadoTextBox.Text,
+                Convert.ToDecimal(TiposAnalisisDropDown.SelectedValue),
+                Utils.ToDateTime(FechaTextBox.Text)));
 
             ViewState["Detalle"] = Analisis.Detalle;
 
@@ -139,6 +152,11 @@ namespace AnalisisUI.Registros
             Grid.Columns[1].Visible = false;
 
             ResultadoTextBox.Text = string.Empty;
+            
+            foreach(var item in Analisis.Detalle)
+                MontoTextBox.Text = item.Precio.ToString();
+
+            BalanceTextBox.Text = MontoTextBox.Text;
         }
 
         protected void Grid_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -156,6 +174,11 @@ namespace AnalisisUI.Registros
             this.BindGrid();
 
             ResultadoTextBox.Text = string.Empty;
+
+            foreach (var item in Analisis.Detalle)
+                MontoTextBox.Text = item.Precio.ToString();
+
+            BalanceTextBox.Text = MontoTextBox.Text;
         }
 
         protected void Grid_PageIndexChanging(object sender, GridViewPageEventArgs e)

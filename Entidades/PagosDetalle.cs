@@ -11,12 +11,10 @@ namespace Entidades
     {
         public int PagosDetalleId { get; set; }
         public decimal Monto { get; set; }
-        public DateTime Fecha { get; set; }
         public PagosDetalle()
         {
             PagosDetalleId = 0;
             Monto = 0;
-            Fecha = DateTime.Now;
         }
         public PagosDetalle(decimal monto)
         {
