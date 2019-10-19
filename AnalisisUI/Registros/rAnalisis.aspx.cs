@@ -49,7 +49,7 @@ namespace AnalisisUI.Registros
             var list = new List<TiposAnalisis>();
             list = repositorio.GetList(p => true);
             TiposAnalisisDropDown.DataSource = list;
-            TiposAnalisisDropDown.DataValueField = "Precio";
+            TiposAnalisisDropDown.DataValueField = "TiposId";
             TiposAnalisisDropDown.DataTextField = "Analisis";
             TiposAnalisisDropDown.DataBind();
         }
@@ -128,7 +128,7 @@ namespace AnalisisUI.Registros
             ((Analisis)ViewState["Analisis"]).Detalle = Analisis.Detalle;
             IDTextBox.Text = Analisis.AnalisisId.ToString();
             FechaTextBox.Text = Analisis.Fecha.ToString("yyyy-MM-dd");
-            PacienteDropDown.SelectedValue = Analisis.Paciente;
+           // PacienteDropDown.SelectedValue = Analisis.Paciente;
             MontoTextBox.Text = Analisis.Monto.ToString();
             BalanceTextBox.Text = Analisis.Balance.ToString();
             this.BindGrid();
@@ -142,7 +142,6 @@ namespace AnalisisUI.Registros
             Analisis.Detalle.Add(new AnalisisDetalle(
                 Utils.ToInt(TiposAnalisisDropDown.SelectedValue),
                 ResultadoTextBox.Text,
-                Convert.ToDecimal(TiposAnalisisDropDown.SelectedValue),
                 Utils.ToDateTime(FechaTextBox.Text)));
 
             ViewState["Detalle"] = Analisis.Detalle;
@@ -152,11 +151,15 @@ namespace AnalisisUI.Registros
             Grid.Columns[1].Visible = false;
 
             ResultadoTextBox.Text = string.Empty;
-            
-            foreach(var item in Analisis.Detalle)
-                MontoTextBox.Text = item.Precio.ToString();
 
-            BalanceTextBox.Text = MontoTextBox.Text;
+            decimal Total = 0;
+            foreach (var item in Analisis.Detalle.ToList())
+            {
+                TiposAnalisis T = new RepositorioBase<TiposAnalisis>().Buscar(item.TiposId);
+                Total += T.Precio;
+            }
+            BalanceTextBox.Text = Total.ToString();
+            MontoTextBox.Text = Total.ToString();
         }
 
         protected void Grid_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -174,11 +177,13 @@ namespace AnalisisUI.Registros
             this.BindGrid();
 
             ResultadoTextBox.Text = string.Empty;
-
-            foreach (var item in Analisis.Detalle)
-                MontoTextBox.Text = item.Precio.ToString();
-
-            BalanceTextBox.Text = MontoTextBox.Text;
+            decimal Total = 0;
+            foreach (var item in Analisis.Detalle.ToList())
+            {
+                Total += item.Precio;
+            }
+            BalanceTextBox.Text = Total.ToString();
+            MontoTextBox.Text = Total.ToString();
         }
 
         protected void Grid_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -296,34 +301,40 @@ namespace AnalisisUI.Registros
             RepositorioBase<Analisis> Repositorio = new RepositorioBase<Analisis>();
             bool paso = false;
 
-            Analisis = AnalisisLlenaClase();
+
+                Analisis = AnalisisLlenaClase();
 
             if (Utils.ToInt(IDTextBox.Text) == 0)
             {
-                paso = Repositorio.Guardar(Analisis);
-                LimpiarAnalisis();
-            }
-            else
-            {
-                if (!AnalisisExisteEnLaBaseDeDatos())
-                {
-
+                if (Grid.Rows.Count == 0) {
                     MostrarMensaje(TiposMensaje.Error, "Error al guardar.");
+                return;
+                }
+            else
+                paso = Repositorio.Guardar(Analisis);
+                    LimpiarAnalisis();
+                }
+                else
+                {
+                    if (!AnalisisExisteEnLaBaseDeDatos())
+                    {
+
+                        MostrarMensaje(TiposMensaje.Error, "Error al guardar.");
+                        return;
+                    }
+                    paso = Repositorio.Modificar(Analisis);
+                    LimpiarAnalisis();
+                }
+
+                if (paso)
+                {
+                    MostrarMensaje(TiposMensaje.Success, "Exito al guardar.");
                     return;
                 }
-                paso = Repositorio.Modificar(Analisis);
+                else
+                    MostrarMensaje(TiposMensaje.Error, "Error al guardar.");
+
                 LimpiarAnalisis();
-            }
-
-            if (paso)
-            {
-                MostrarMensaje(TiposMensaje.Success, "Exito al guardar.");
-                return;
-            }
-            else
-                MostrarMensaje(TiposMensaje.Error, "Error al guardar.");
-
-            LimpiarAnalisis();
         }
 
         protected void AnalisisEliminarButton_Click(object sender, EventArgs e)

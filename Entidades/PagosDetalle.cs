@@ -10,15 +10,18 @@ namespace Entidades
     public class PagosDetalle
     {
         public int PagosDetalleId { get; set; }
-        public decimal Monto { get; set; }
-        public PagosDetalle()
+        public int AnalisisId { get; set; }
+        public decimal MontoAnalisis { get; set; }
+        public decimal MontoPagado { get; set; }
+        public DateTime Fecha { get; set; }
+
+        public PagosDetalle(int id, int analisisid, decimal montoanalisis, decimal montopagado, DateTime fecha)
         {
-            PagosDetalleId = 0;
-            Monto = 0;
-        }
-        public PagosDetalle(decimal monto)
-        {
-            Monto = monto;
+            PagosDetalleId = id;
+            AnalisisId = analisisid;
+            MontoAnalisis = montoanalisis;
+            MontoPagado = montopagado;
+            Fecha = fecha;
         }
     }
 }

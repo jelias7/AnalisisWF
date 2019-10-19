@@ -12,14 +12,14 @@ namespace Entidades
     {
         [Key]
         public int PagosId { get; set; }
-        public int AnalisisId { get; set; }
-        public decimal Monto { get; set; }
+        public int PacienteId { get; set; }
+        public decimal Pagado { get; set; }
         public DateTime Fecha { get; set; }
         public Pagos()
         {
             PagosId = 0;
-            AnalisisId = 0;
-            Monto = 0;
+            PacienteId = 0;
+            Pagado = 0;
             Fecha = DateTime.Now;
         }
     }

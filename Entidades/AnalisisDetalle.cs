@@ -25,11 +25,10 @@ namespace Entidades
             Precio = 0;
             Fecha = DateTime.Now;
         }
-        public AnalisisDetalle(int analisis, string resultado, decimal monto, DateTime date)
+        public AnalisisDetalle(int analisis, string resultado, DateTime date)
         {
             TiposId = analisis;
             Resultado = resultado;
-            Precio = monto;
             Fecha = date;
         }
     }
