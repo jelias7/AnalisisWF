@@ -12,15 +12,16 @@ namespace Entidades
     {
         [Key]
         public int PagosId { get; set; }
-        public int PacienteId { get; set; }
+        public int AnalisisId { get; set; }
         public decimal Pagado { get; set; }
-        public DateTime Fecha { get; set; }
+        public virtual List<PagosDetalle> Detalle { get; set; }
+
         public Pagos()
         {
             PagosId = 0;
-            PacienteId = 0;
+            AnalisisId = 0;
             Pagado = 0;
-            Fecha = DateTime.Now;
+            Detalle = new List<PagosDetalle>();
         }
     }
 }

@@ -207,8 +207,7 @@ namespace AnalisisUI.Registros
             if (Utils.ToInt(TiposIdTextBox.Text) == 0)
             {
                 paso = Repositorio.Guardar(Tipo);
-                LimpiarTiposAnalisis();
-            }
+                Response.Redirect(Request.RawUrl);            }
             else
             {
                 if (!TiposExisteEnLaBaseDeDatos())
@@ -218,7 +217,7 @@ namespace AnalisisUI.Registros
                     return;
                 }
                 paso = Repositorio.Modificar(Tipo);
-                LimpiarTiposAnalisis();
+                Response.Redirect(Request.RawUrl);
             }
 
             if (paso)
