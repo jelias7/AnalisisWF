@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Consultas\cAnalisis.aspx" />
+    <Content Include="Consultas\cPagos.aspx" />
     <Content Include="Consultas\cTiposAnalisis.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -147,6 +148,13 @@
     </Compile>
     <Compile Include="Consultas\cAnalisis.aspx.designer.cs">
       <DependentUpon>cAnalisis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\cPagos.aspx.cs">
+      <DependentUpon>cPagos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consultas\cPagos.aspx.designer.cs">
+      <DependentUpon>cPagos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Consultas\cTiposAnalisis.aspx.cs">
       <DependentUpon>cTiposAnalisis.aspx</DependentUpon>
