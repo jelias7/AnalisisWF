@@ -311,9 +311,9 @@ namespace AnalisisUI.Registros
                 }
             else
                 paso = Repositorio.Guardar(Analisis);
-                    LimpiarAnalisis();
-                }
-                else
+                Response.Redirect(Request.RawUrl);
+            }
+            else
                 {
                     if (!AnalisisExisteEnLaBaseDeDatos())
                     {
@@ -322,10 +322,10 @@ namespace AnalisisUI.Registros
                         return;
                     }
                     paso = Repositorio.Modificar(Analisis);
-                    LimpiarAnalisis();
-                }
+                Response.Redirect(Request.RawUrl);
+            }
 
-                if (paso)
+            if (paso)
                 {
                     MostrarMensaje(TiposMensaje.Success, "Exito al guardar.");
                     return;
@@ -354,7 +354,7 @@ namespace AnalisisUI.Registros
             else
                 MostrarMensaje(TiposMensaje.Error, "No se ha podido eliminar.");
 
-            LimpiarTiposAnalisis();
+            Response.Redirect(Request.RawUrl);
         }
     }
 }
