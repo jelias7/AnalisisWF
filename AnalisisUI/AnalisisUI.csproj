@@ -153,6 +153,8 @@
     <Content Include="AnalisisDb3DataSet.xss">
       <DependentUpon>AnalisisDb3DataSet.xsd</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\analisiswf - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\analisiswf - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
